@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>J Y S Technology · Consulta tu reparación</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <div class="w">
+            <div class="nb">
+                <div class="brand">
+                    <div class="logo">JS</div>
+                    J Y S Technology
+                </div>
+                <div>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="productos.html" style="font-weight: 700; color: var(--brand-700, #0b3a3c);">🛍️ Productos</a>
+                    <a href="#how">Cómo funciona</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="inicio">
+        <div class="w">
+            <div class="eyebrow">Bienvenido a J Y S Technology</div>
+            <h1>Sigue la reparación de tu dispositivo</h1>
+            <p class="lead">
+                Ingresa el código que te entregamos al dejar tu equipo y consulta
+                el estado, el historial y las fotografías de la reparación.
+            </p>
+
+            <form class="sb" id="formConsulta">
+                <input id="q" placeholder="Ej: RP-4K7M2X"
+                       autocapitalize="characters"
+                       aria-label="Código de seguimiento" required>
+                <button class="btn" id="b" type="submit">Consultar</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="w">
+        <div class="cards" id="servicios">
+            <div class="sc hl">
+                <div class="ic">🔎</div>
+                <b>Seguimiento</b>
+                <p>Consulta el estado de tu equipo con tu código.</p>
+            </div>
+            <div class="sc">
+                <div class="ic">📱</div>
+                <b>Celulares</b>
+                <p>Diagnóstico y reparación de smartphones.</p>
+            </div>
+            <div class="sc">
+                <div class="ic">💻</div>
+                <b>Laptops y PC</b>
+                <p>Mantenimiento, reparación y mejoras.</p>
+            </div>
+            <div class="sc">
+                <div class="ic">🎮</div>
+                <b>PC y más</b>
+                <p>Revisión y reparación de otros dispositivos.</p>
+            </div>
+        </div>
+
+        <div id="r" aria-live="polite"></div>
+
+        <section id="how">
+            <h2>¿Cómo funciona?</h2>
+            <div class="st">
+                <div>
+                    <span>1</span>
+                    <b>Deja tu equipo</b>
+                    <p>Lo registramos y recibes un código único.</p>
+                </div>
+                <div>
+                    <span>2</span>
+                    <b>Nosotros reparamos</b>
+                    <p>Actualizamos el estado y las fotografías en cada etapa.</p>
+                </div>
+                <div>
+                    <span>3</span>
+                    <b>Tú consultas</b>
+                    <p>Revisa el avance cuando quieras desde tu celular.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacto">
+        <div class="w">
+            <div class="brand">
+                <div class="logo">JS</div>J Y S Technology
+            </div>
+            <div id="ct">Servicio técnico especializado.</div>
+            <div style="margin-top: 10px; opacity: .7;">
+                © <span id="yr"></span> J Y S Technology. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de la aplicación (módulo) -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>

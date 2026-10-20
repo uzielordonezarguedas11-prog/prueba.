@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS TECH | Catálogo de Productos</title>
+    <meta name="theme-color" content="#0b3a3c">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 12px;
+        }
+
+        /* CABECERA COMPACTA PARA MÓVIL */
+        header.hdr-top {
+            background: linear-gradient(160deg, #082f33 0%, #0b3a3c 60%, #0f766e 100%);
+            color: #ffffff;
+            padding: 16px 0 35px 0;
+        }
+
+        .hdr-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .hdr-logo {
+            background: linear-gradient(135deg, #34d399, #0f766e);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        .btn-return {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-decoration: none;
+        }
+
+        .hdr-hero span.eyebrow {
+            display: inline-block;
+            background: rgba(110, 231, 183, 0.15);
+            color: #6ee7b7;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .hdr-hero h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .hdr-hero p {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        main.main-sec {
+            flex: 1;
+            margin-top: -20px;
+            padding-bottom: 30px;
+        }
+
+        .card-panel {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .kicker {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: #0f766e;
+            text-transform: uppercase;
+        }
+
+        .card-head h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .head-icon {
+            font-size: 1.1rem;
+            background: #ccfbf1;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .text-muted {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* GRILLA OPTIMIZADA PARA MÓVIL (Múltiples columnas) */
+        .prod-grid {
+            display: grid;
+            /* Se adapta inteligentemente: en celulares muy pequeños pone 2 columnas (140px min), en tablets o PC más */
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        @media (min-width: 640px) {
+            .prod-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 16px;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            .card-panel {
+                padding: 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .prod-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        .prod-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+
+        .prod-img-wrapper {
+            width: 100%;
+            height: 110px;
+            background: #f8fafc;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            border: 1px solid #f1f5f9;
+        }
+
+        @media (min-width: 640px) {
+            .prod-img-wrapper {
+                height: 160px;
+            }
+            .prod-card {
+                padding: 14px;
+            }
+        }
+
+        .prod-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .prod-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 3px;
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (min-width: 640px) {
+            .prod-title {
+                font-size: 1rem;
+            }
+        }
+
+        .prod-price {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #0f766e;
+            margin-bottom: 4px;
+        }
+
+        @media (min-width: 640px) {
+            .prod-price {
+                font-size: 1.2rem;
+            }
+        }
+
+        .prod-desc {
+            font-size: 0.72rem;
+            color: #64748b;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        @media (min-width: 640px) {
+            .prod-desc {
+                font-size: 0.85rem;
+                -webkit-line-clamp: 3;
+            }
+        }
+
+        .btn-wp {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 7px 8px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.72rem;
+            border-radius: 6px;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+        }
+
+        @media (min-width: 640px) {
+            .btn-wp {
+                padding: 10px 14px;
+                font-size: 0.88rem;
+                border-radius: 8px;
+            }
+        }
+
+        .msg-box {
+            padding: 12px;
+            background: #f8fafc;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        /* PIE DE PÁGINA */
+        footer.ftr {
+            background: #082f33;
+            color: #94a3b8;
+            padding: 16px 0;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.78rem;
+        }
+
+        .ftr-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ftr-content strong {
+            color: #34d399;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hdr-top">
+        <div class="container">
+            <nav class="hdr-nav">
+                <a class="hdr-brand" href="index.html">
+                    <div class="hdr-logo">JS</div>
+                    <span>JS TECH</span>
+                </a>
+                <div>
+                    <a href="index.html" class="btn-return">
+                        Volver al Inicio
+                    </a>
+                </div>
+            </nav>
+
+            <div class="hdr-hero">
+                <span class="eyebrow">TIENDA Y ACCESORIOS</span>
+                <h1>Catálogo</h1>
+                <p>Explora los repuestos y accesorios disponibles.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-sec">
+        <section class="card-panel">
+            <div class="card-head">
+                <div>
+                    <span class="kicker">DISPONIBLES</span>
+                    <h2>Nuestros Productos</h2>
+                </div>
+                <div class="head-icon">🛍️</div>
+            </div>
+            <p class="text-muted">Escríbenos al +506 8638 9553 para consultas y compras.</p>
+            
+            <div id="catalogoClientes" class="prod-grid" aria-live="polite">
+                <div class="msg-box">Cargando productos...</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="ftr">
+        <div class="container ftr-content">
+            <strong>JS TECH</strong>
+            <span>Tienda Virtual Móvil</span>
+        </div>
+    </footer>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { initializeFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBHdtd1YLq8z_cuVgUDx33Z088okq0Sriw",
+        authDomain: "servicio-tecnico-1d91f.firebaseapp.com",
+        projectId: "servicio-tecnico-1d91f",
+        storageBucket: "servicio-tecnico-1d91f.firebasestorage.app",
+        messagingSenderId: "475926146823",
+        appId: "1:475926146823:web:1bd26d301c1ad0d25f5fa2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+
+    const contenedor = document.getElementById("catalogoClientes");
+
+    function escapar(valor) {
+        return String(valor ?? "").replace(/[&<>"']/g, caracter => ({
+            "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+        })[caracter]);
+    }
+
+    onSnapshot(query(collection(db, "products"), orderBy("creado", "desc")), snapshot => {
+        if (snapshot.empty) {
+            contenedor.innerHTML = `<div class="msg-box">No hay productos disponibles por el momento.</div>`;
+            return;
+        }
+        let html = "";
+        snapshot.forEach(docSnap => {
+            const p = docSnap.data();
+            const mensajeWp = encodeURIComponent(`Hola, estoy interesado en el producto: ${p.nombre} (Precio: ₡${p.precio})`);
+            const imagenUrl = (p.imagen && p.imagen.trim() !== "") ? p.imagen : "logo.jpeg";
+
+            html += `
+                <article class="prod-card">
+                    <div>
+                        <div class="prod-img-wrapper">
+                            <img src="${escapar(imagenUrl)}" alt="${escapar(p.nombre)}" loading="lazy" onerror="this.src='logo.jpeg'">
+                        </div>
+                        <h3 class="prod-title">${escapar(p.nombre)}</h3>
+                        <div class="prod-price">₡${escapar(p.precio)}</div>
+                        <p class="prod-desc">${escapar(p.descripcion)}</p>
+                    </div>
+                    <a href="https://wa.me/50686389553?text=${mensajeWp}" target="_blank" class="btn-wp">
+                        💬 WhatsApp
+                    </a>
+                </article>
+            `;
+        });
+        contenedor.innerHTML = html;
+    });
+</script>
+</body>
+</html>
